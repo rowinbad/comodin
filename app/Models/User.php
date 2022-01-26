@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
+    public function rol(){
+        return $this->hasOne(Role::class);
+    }
+    public function libro_usuario(){
+        return $this->hasMany(Book_User::class);
+    }
     use HasFactory;
 }
