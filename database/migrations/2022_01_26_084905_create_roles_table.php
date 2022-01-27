@@ -22,6 +22,7 @@ class CreateRolesTable extends Migration
             //$table->foreign('id_usuario')->references('id')->on('users');
             
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

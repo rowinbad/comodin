@@ -22,6 +22,7 @@ class CreateBooksTable extends Migration
             $table->text('link');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
