@@ -11,7 +11,7 @@ class User extends Model
         return $this->hasOne(Role::class);
     }
     public function libro_usuario(){
-        return $this->hasMany(Book_User::class);
+        return $this->hasMany(BookUser::class);
     }
     use HasFactory;
 }

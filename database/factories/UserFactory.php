@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
+use App\Models\Role;
 
 class UserFactory extends Factory
 {
@@ -16,8 +18,8 @@ class UserFactory extends Factory
         return [
             'nombre' => $this->faker->name(),
             'password' => $this->faker->regexify('[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}'),
-            'creditos' => $this->faker->numberBetween($min = 0, $max = 100),
-            'id_role' => Role::all()->random()->id,
+            'edad' => $this->faker->numberBetween($min = 0, $max = 100),
+            'id_rol' => Role::all()->random()->id,
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
         ];
