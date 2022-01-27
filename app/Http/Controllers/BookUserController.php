@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Role;
+use App\Models\BookUser;
 use Illuminate\Support\Facades\Validator;
 
-class RoleController extends Controller
+class BookUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +16,13 @@ class RoleController extends Controller
     public function index()
     {
         //
-        $roles = Role::all();
-        if($roles == NULL){
+        $bookUsers = BookUser::all();
+        if($bookusers == NULL){
             return response()->json([
-                'respuesta' => 'No se encuentran roles',
+                'respuesta' => 'BookUser no encontrado',
             ]);
         }
-        return response($roles);
+        return response($bookUsers);
     }
 
     /**
@@ -46,23 +46,24 @@ class RoleController extends Controller
         
         $validator = Validator::make(
             $request->all(),[
-                'tipo' => 'required|min:2|max:20',
+                'id_libro' => 'required',
+                'id_usuario' => 'required'
             ],
             [
-                'tipo.required' => 'Debes ingresar el tipo',
-                'tipo.min' => 'El tipo debe ser de largo mínimo :min',
-                'tipo.max' => 'El tipo debe ser de largo máximo :max',
+                'id_libro.required' => 'Debes ingresar el id del libro',
+                'id_usuario.required' => 'Debes ingresar el id del usuario'
             ]
         );
         if ($validator->fails()){
             return response($validator->errors());
         }
-        $role=new Role();
-        $role->tipo = $request->tipo;
-        $role->save();
+        $bookUser=new BookUser();
+        $bookUser->id_libro = $request->id_libro;
+        $bookUser->id_usuario = $request->id_usuario;
+        $bookUser->save();
         return response()->json([
-            'message'=>'Se ha creado un nuevo rol',
-            'id'=>$role->id
+            'message'=>'Se ha creado un nuevo BookUser',
+            'id'=>$bookUser->id
         ], 200);
     }
 
@@ -75,13 +76,13 @@ class RoleController extends Controller
     public function show($id)
     {
         //
-        $roles = Role::find($id);
-        if($roles == NULL){
+        $bookUser = BookUser::find($id);
+        if($bookUser == NULL){
             return response()->json([
-                'respuesta' => 'No existe el rol con ese id',
+                'respuesta' => 'No existe el BookUser con ese id',
             ]);
         }
-        return response($roles);
+        return response($bookUser);
     }
 
     /**
@@ -107,28 +108,28 @@ class RoleController extends Controller
         //
         $validator = Validator::make(
             $request->all(),[
-                'tipo' => 'required|min:2|max:20',
+                'id_libro' => 'required',
+                'id_usuario' => 'required'
             ],
             [
-                'tipo.required' => 'Debes ingresar el tipo',
-                'tipo.min' => 'tipo debe tener minimo 2 caracteres',
-                'tipo.max' => 'tipo no puede superar 20 caracteres',
+                'id_libro.required' => 'Debes ingresar el id del libro',
+                'id_usuario.required' => 'Debes ingresar el id del usuario'
             ]
         );
         if ($validator->fails()){
             return response($validator->errors());
         }
 
-        $role= Role::find($id);
-        if($role == NULL){
-            return "No existe el rol a actualizar";
+        $bookUser= BookUser::find($id);
+        if($bookUser == NULL){
+            return "No existe el BookUser a actualizar";
         }
 
-        $role->tipo = $request->tipo;
-        $role->save();
+        $bookUser->id_libro = $request->id_libro;
+        $bookUser->save();
         return response()->json([
-            'message'=>'Se ha actualizado el rol',
-            'id'=>$role->id
+            'message'=>'Se ha actualizado el BookUser',
+            'id'=>$bookUser->id
         ], 201);
 
     }
@@ -142,16 +143,16 @@ class RoleController extends Controller
     public function destroy($id)
     {
         //
-        $role = Role::find($id);
+        $bookUser = BookUser::find($id);
 
-        if($role == NULL){
-            return "No existe el rol que desea eliminar";
+        if($bookUser == NULL){
+            return "No existe el BookUser que desea eliminar";
         }
-        $role->delete();
+        $bookUser->delete();
 
         return response()->json([
-            "message"=>"Se elimino el rol",
-            "id"=>$role->id
+            "message"=>"Se elimino el BookUser",
+            "id"=>$bookUser->id
         ]);
         
     }

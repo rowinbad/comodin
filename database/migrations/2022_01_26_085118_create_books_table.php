@@ -17,7 +17,7 @@ class CreateBooksTable extends Migration
             $table->id();
 
             $table->string('nombre',100);
-            $table->string('nombre_autor');
+            $table->string('nombre_autor',30);
             $table->date('fecha_publicacion');
             $table->text('link');
 
