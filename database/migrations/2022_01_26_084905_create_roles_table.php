@@ -18,9 +18,6 @@ class CreateRolesTable extends Migration
 
             $table->string('tipo',20);
             
-            //$table->unsignedBigInteger('id_usuario')->nullable();
-            //$table->foreign('id_usuario')->references('id')->on('users');
-            
             $table->timestamps();
             $table->softDeletes();
         });
